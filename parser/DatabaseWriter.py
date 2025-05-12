@@ -35,6 +35,15 @@ class DatabaseWriter(Writer):
         :param table: (str) Table name
         :param data: (list dict) data to insert.
         """
+        # print(data)
+        if isinstance(data, dict):
+            data = [data]
+
+        keys = list(set([k for r in data for k in r.keys()]))
+        for r in data:
+            for k in keys:
+                if k not in r:
+                    r[k] = None
         table = Table(table, self.meta, autoload_with=self.engine)
         with self.engine.connect() as conn:
             statement = table.insert().values(data)
