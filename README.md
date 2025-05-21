@@ -38,8 +38,14 @@ PYPI instructions: https://packaging.python.org/en/latest/tutorials/installing-p
 proceess_dataset.py is the entry point and running it with the -h option will give a list of options.
 
 ```
-python process_dataset.py -h
+python parser.py -h
 ```
+
+alternative:
+```
+python -m parser -h
+```
+
 
 ### 1. Validate a dataset
 
@@ -50,10 +56,10 @@ temporary folder which is used in the validation process, the temporary folder c
 
 Examples:
 ```
-python process_dataset.py -v ~/mydata
+python parser.py -v ~/mydata
 ```
 ```
-python process_dataset.py -v ~/mydata/mymzid.mzid -t ~/mytempdir
+python parser.py -v ~/mydata/mymzid.mzid -t ~/mytempdir
 ```
 
 The result is written to the console. If the data fails validation but the error message is not informative,
@@ -67,15 +73,15 @@ file or a directory containing multiple mzIdentML files, in which case all of th
 
 Examples:
 ```
-python process_dataset.py --seqsandresiduepairs ~/mydata -t ~/mytempdir
+python parser.py --seqsandresiduepairs ~/mydata -t ~/mytempdir
 ```
 
 ```
-python process_dataset.py --seqsandresiduepairs ~/mydata/mymzid.mzid
+python parser.py --seqsandresiduepairs ~/mydata/mymzid.mzid
 ```
 
 It can also be accessed programitically by using the 
-`json_sequences_and_residue_pairs(filepath, tmpdir)` function in process_dataset.py. 
+`json_sequences_and_residue_pairs(filepath, tmpdir)` function in parser.py. 
 
 ### 3. populate the xiview-api database
 
@@ -126,7 +132,7 @@ python database/create_db_schema.py
 #### Populate the database
 To parse a test dataset:
 ```
-python process_dataset.py -d ~/PXD038060
+python parser.py -d ~/PXD038060
 ```
 
 The command line options that populate the database are -d, -f and -p. Only one of these can be used.
