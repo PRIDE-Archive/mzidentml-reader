@@ -93,6 +93,8 @@ psql
 create database xiview;
 create user xiadmin with login password 'your_password_here';
 grant all privileges on database xiview to xiadmin;
+\connect xiview;
+GRANT ALL PRIVILEGES ON SCHEMA public TO xiadmin;
 ```
 
 find the hba.conf file in the postgresql installation directory and add a line to allow  the xiadmin role to access the database:
@@ -107,6 +109,8 @@ then restart postgresql:
 ```
 sudo service postgresql restart
 ```
+
+
 
 
 #### Configure the python environment for the file parser
