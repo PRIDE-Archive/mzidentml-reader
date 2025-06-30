@@ -111,7 +111,7 @@ def process_dir(local_dir, project_identifier, writer_method, nopeaklist):
     convert_dir(local_dir, project_identifier, writer_method, nopeaklist=nopeaklist)
 
 
-def validate(validate_arg, tmpdir):
+def validate(validate_arg, tmpdir, nopeaklist):
     """Validates mzIdentML files against the XSD schema, then checks for other errors.
     This includes checking that Seq elements are present for target proteins,
     even though omitting them is technically valid.
@@ -120,6 +120,8 @@ def validate(validate_arg, tmpdir):
         The path to the mzIdentML file or directory to be validated.
     :param tmpdir: str
         The temporary directory to use for validation - an Sqlite DB is created here.
+    :param nopeaklist: bool
+
     :return: None
     """
     if os.path.isdir(validate_arg):
@@ -127,14 +129,14 @@ def validate(validate_arg, tmpdir):
         for file in os.listdir(validate_arg):
             if file.endswith(".mzid"):
                 file_to_validate = os.path.join(validate_arg, file)
-                if validate_file(file_to_validate, tmpdir):
+                if validate_file(file_to_validate, tmpdir,  nopeaklist=nopeaklist):
                     print(f'Validation successful for file {file_to_validate}.')
                 else:
                     print(f'Validation failed for file {file_to_validate}. Exiting.')
                     sys.exit(1)
         print(f'SUCCESS! Directory {validate_arg} validation complete. Exciting.')
     else:
-        if not validate_file(validate_arg, tmpdir):
+        if not validate_file(validate_arg, tmpdir, nopeaklist=nopeaklist):
             print(f'Validation failed for file {validate_arg}. Exiting.')
             sys.exit(1)
         print(f'SUCCESS! File {validate_arg} validation complete. Exciting.')
@@ -231,6 +233,7 @@ def sequences_and_residue_pairs(filepath, tmpdir):
             GROUP BY pe1.dbsequence_id , dbs1.accession, pos1, pe2.dbsequence_id, dbs2.accession , pos2
             ORDER BY pe1.dbsequence_id , pos1, pe2.dbsequence_id, pos2
             ;""")
+            # note that using pos1 and pos2 in group by won't work in postgres
             start_time = time.time()
             rs = conn.execute(sql)
             elapsed_time = time.time() - start_time
@@ -265,7 +268,7 @@ def main():
         elif args.dir:
             process_dir(args.dir, args.identifier, writer_type, args.nopeaklist)
         elif args.validate:
-            validate(args.validate, temp_dir)
+            validate(args.validate, temp_dir, args.nopeaklist)
         elif args.seqsandresiduepairs:
             json_data = json_sequences_and_residue_pairs(args.seqsandresiduepairs, temp_dir)
             with open(args.json, 'w') as f:
@@ -407,6 +410,7 @@ def convert_dir(local_dir, project_identifier, writer_method, nopeaklist=False):
     """Converts files in a local directory."""
     peaklist_dir = None if nopeaklist else local_dir
     for file in os.listdir(local_dir):
+        gc.collect()
         if file.endswith((".mzid", ".mzid.gz")):
             logger.info(f"Processing {file}")
             conn_str = get_conn_str()
@@ -414,18 +418,22 @@ def convert_dir(local_dir, project_identifier, writer_method, nopeaklist=False):
                 writer = APIWriter(pxid=project_identifier)
             else:
                 writer = DatabaseWriter(conn_str, pxid=project_identifier)
-            id_parser = MzIdParser(os.path.join(local_dir, file), local_dir, peaklist_dir, writer, logger)
-            try:
-                id_parser.parse()
-                # logger.info(id_parser.warnings + "\n")
-            except Exception as e:
-                logger.error(f"Error parsing {file}")
-                logger.exception(e)
-                raise e
-            gc.collect()
+            if schema_validate(os.path.join(local_dir, file)):
+                id_parser = MzIdParser(os.path.join(local_dir, file), local_dir, peaklist_dir, writer, logger)
+                try:
+                    id_parser.parse()
+                    # logger.info(id_parser.warnings + "\n")
+                except Exception as e:
+                    logger.error(f"Error parsing {file}")
+                    logger.exception(e)
+                    raise e
+            else:
+                print(f'File {file} is schema invalid.')
+                exit()
 
 
-def validate_file(filepath, tmpdir):
+
+def validate_file(filepath, tmpdir, nopeaklist=False):
     """
     Validates mzIdentML files against the 1.2.0 or 1.3.0 schema, then checks for some other errors.
 
@@ -445,6 +453,7 @@ def validate_file(filepath, tmpdir):
 
     local_dir = os.path.dirname(filepath)
     file = os.path.basename(filepath)
+    peaklist_dir = None if nopeaklist else local_dir
 
     if not file.endswith(".mzid"):
         raise ValueError(f'Invalid file path (must end ".mzid"): {filepath}')
@@ -465,7 +474,7 @@ def validate_file(filepath, tmpdir):
             conn.execute(text("PRAGMA foreign_keys = ON;"))
 
         writer = DatabaseWriter(conn_str, upload_id=1, pxid="Validation")
-        id_parser = SqliteMzIdParser(os.path.join(local_dir, file), local_dir, local_dir, writer, logger)
+        id_parser = SqliteMzIdParser(os.path.join(local_dir, file), local_dir, peaklist_dir, writer, logger)
         try:
             id_parser.parse()
             os.remove(test_database)
