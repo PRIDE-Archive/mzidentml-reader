@@ -304,7 +304,7 @@ def convert_pxd_accession(px_accession, temp_dir, writer_method, dontdelete):
 
 def convert_pxd_accession_from_pride(px_accession, temp_dir, writer_method, dontdelete):
     """get ftp location from PRIDE API"""
-    px_url = f'https://www.ebi.ac.uk/pride/ws/archive/v2/files/byProject?accession={px_accession}'
+    px_url = f'https://www.ebi.ac.uk/pride/ws/archive/v3/projects/{px_accession}/files'
     logger.info(f'GET request to PRIDE API: {px_url}')
     pride_response = requests.get(px_url)
 
