@@ -44,7 +44,6 @@ setup(
         'pyteomics>=4.7.3',
         'requests>=2.31.0',
         'urllib3>=1.24.2',
-        'pytest',
         'psycopg2-binary',
         'sqlalchemy>=2.0.38',
         'sqlalchemy-utils',
@@ -55,7 +54,6 @@ setup(
         'python-jose>=3.3.0',
         'passlib',
         'jose',
-
     ],
     entry_points={"console_scripts": ["process_dataset = parser.process_dataset:main"]},
     platforms=["any"],
