@@ -1,7 +1,8 @@
 #!/bin/bash
 # Security check script for mzidentml-reader
 
-set -e
+set -Eeuo pipefail
+IFS=$'\n\t'
 
 echo "🔒 Running security checks for mzidentml-reader..."
 
