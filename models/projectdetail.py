@@ -6,7 +6,9 @@ from models.base import Base
 
 class ProjectDetail(Base):
     __tablename__ = "projectdetails"
-    id: Mapped[str] = mapped_column(Integer, primary_key=True, autoincrement=True, nullable=False)
+    id: Mapped[str] = mapped_column(
+        Integer, primary_key=True, autoincrement=True, nullable=False
+    )
     project_id: Mapped[str] = mapped_column(Text, nullable=False)
     title: Mapped[str] = mapped_column(Text, nullable=True)
     description: Mapped[str] = mapped_column(Text, nullable=True)
@@ -18,5 +20,9 @@ class ProjectDetail(Base):
     xiview_url: Mapped[str] = mapped_column(Text, nullable=True)
     pdb_ihm_url: Mapped[str] = mapped_column(Text, nullable=True)
 
-    project_sub_details = relationship('ProjectSubDetail', back_populates='project_detail',
-                                       cascade='all, delete-orphan', single_parent=True)
+    project_sub_details = relationship(
+        "ProjectSubDetail",
+        back_populates="project_detail",
+        cascade="all, delete-orphan",
+        single_parent=True,
+    )

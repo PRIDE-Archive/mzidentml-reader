@@ -19,8 +19,10 @@ def db_info():
 @pytest.fixture()
 def psql_conn_str(db_info):
     # returns the test database credentials
-    return f"postgresql://{db_info['username']}:{db_info['password']}@{db_info['hostname']}" \
-           f":{db_info['port']}/{db_info['database']}"
+    return (
+        f"postgresql://{db_info['username']}:{db_info['password']}@{db_info['hostname']}"
+        f":{db_info['port']}/{db_info['database']}"
+    )
 
 
 @pytest.fixture()
@@ -31,7 +33,7 @@ def engine(psql_conn_str):
     engine.dispose()
 
 
-@pytest.fixture(scope='function')
+@pytest.fixture(scope="function")
 def use_database(psql_conn_str):
     # Create a temporary test Postgresql database
     # First ensure any existing database is dropped
@@ -45,5 +47,6 @@ def use_database(psql_conn_str):
     yield
     # Give some time for connections to close
     import time
+
     time.sleep(0.1)
     drop_db(psql_conn_str)

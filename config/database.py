@@ -1,6 +1,7 @@
 """
 sessions used by sqlalchemy
 """
+
 from config_parser import get_conn_str
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
