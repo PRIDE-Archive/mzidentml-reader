@@ -36,3 +36,6 @@ skips = ["B101", "B601"]
 
 [tool.bandit.assert_used]
 skips = ["*_test.py", "*test_*.py"]
+
+[tool.flake8]
+max-line-length = 88
