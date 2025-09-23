@@ -166,9 +166,6 @@ pipenv run isort .
 
 # Check style and syntax
 pipenv run flake8
-
-# Run all quality checks
-pipenv run pre-commit run --all-files
 ```
 
 ### Testing
