@@ -142,13 +142,17 @@ class PeakListWrapper:
         :return: path to resulting folder
         """
         if zip_file.endswith(".zip"):
-            zip_ref = zipfile.ZipFile(zip_file, "r")
-            unzip_path = os.path.join(
-                str(out_path), ntpath.basename(zip_file + "_unzip")
-            )
-            zip_ref.extractall(unzip_path)
-            zip_ref.close()
-
+            with zipfile.ZipFile(zip_file, "r") as zip_ref:
+                unzip_path = os.path.join(
+                    str(out_path), f"{ntpath.basename(zip_file)}_unzip"
+                )
+                os.makedirs(unzip_path, exist_ok=True)
+                base = os.path.abspath(unzip_path) + os.sep
+                for member in zip_ref.infolist():
+                    dest = os.path.abspath(os.path.join(unzip_path, member.filename))
+                    if not dest.startswith(base):
+                        raise Exception(f"Illegal path in zip: {member.filename}")
+                    zip_ref.extract(member, unzip_path)
             return unzip_path
 
         else:
