@@ -10,18 +10,20 @@ import re
 import struct
 import traceback
 import zipfile
+from parser.APIWriter import APIWriter
+from parser.peaklistReader.PeakListWrapper import PeakListWrapper
 from time import time
 
 import obonet
-from pyteomics import mzid  # https://pyteomics.readthedocs.io/en/latest/data.html#controlled-vocabularies
+from lxml import etree
+from pyteomics import (
+    mzid,  # https://pyteomics.readthedocs.io/en/latest/data.html#controlled-vocabularies
+)
 from pyteomics.auxiliary import cvquery
+
 # noinspection PyProtectedMember
 from pyteomics.xml import _local_name
-from lxml import etree
 from sqlalchemy.exc import SQLAlchemyError
-
-from parser.APIWriter import APIWriter
-from parser.peaklistReader.PeakListWrapper import PeakListWrapper
 
 
 class MzIdParseException(Exception):

@@ -1,7 +1,9 @@
+from typing import Any, Optional
+
+from sqlalchemy import JSON, Float, ForeignKey, Integer, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import ForeignKey, Text, JSON, Integer, Float, UniqueConstraint
+
 from models.base import Base
-from typing import Optional, Any
 
 
 class SpectrumIdentificationProtocol(Base):

@@ -1,7 +1,18 @@
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import ForeignKey, Text, BOOLEAN, BIGINT, FLOAT, JSON, ForeignKeyConstraint, Integer
-from models.base import Base
 from typing import Any, Optional
+
+from sqlalchemy import (
+    BIGINT,
+    BOOLEAN,
+    FLOAT,
+    JSON,
+    ForeignKey,
+    ForeignKeyConstraint,
+    Integer,
+    Text,
+)
+from sqlalchemy.orm import Mapped, mapped_column
+
+from models.base import Base
 
 
 class SearchModification(Base):

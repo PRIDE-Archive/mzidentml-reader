@@ -1,8 +1,7 @@
 import codecs
 import os.path
 
-from setuptools import find_packages
-from setuptools import setup
+from setuptools import find_packages, setup
 
 with open("README.md", encoding="UTF-8") as fh:
     long_description = fh.read()

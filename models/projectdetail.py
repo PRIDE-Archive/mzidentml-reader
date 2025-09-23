@@ -1,5 +1,6 @@
+from sqlalchemy import Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import Text, Integer
+
 from models.base import Base
 
 

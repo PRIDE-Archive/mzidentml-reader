@@ -1,7 +1,7 @@
-import os
-
-from parser import SimpleFASTA
 import logging
+import os
+from parser import SimpleFASTA
+
 from .db_pytest_fixtures import *
 
 logging.basicConfig(level=logging.DEBUG,

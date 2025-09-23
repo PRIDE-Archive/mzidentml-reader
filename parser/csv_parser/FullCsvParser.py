@@ -1,8 +1,9 @@
 """"""
-from .AbstractCsvParser import AbstractCsvParser, CsvParseException
-from time import time
-import re
 import json
+import re
+from time import time
+
+from .AbstractCsvParser import AbstractCsvParser, CsvParseException
 
 
 class FullCsvParser(AbstractCsvParser):

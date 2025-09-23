@@ -1,8 +1,20 @@
 """This file contains the Match class, which is a SQLAlchemy model for the match table in the database."""
+from typing import Any, Optional
+
+from sqlalchemy import (
+    BOOLEAN,
+    CHAR,
+    FLOAT,
+    JSON,
+    ForeignKey,
+    ForeignKeyConstraint,
+    Index,
+    Integer,
+    Text,
+)
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import ForeignKey, Text, FLOAT, JSON, BOOLEAN, Integer, ForeignKeyConstraint, CHAR, Index
+
 from models.base import Base
-from typing import Optional, Any
 
 
 class Match(Base):

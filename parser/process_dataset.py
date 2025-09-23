@@ -2,15 +2,21 @@
 import argparse
 import ftplib
 import gc
+import importlib.resources
+
+# Configure logging
 import logging.config
 import os
-import traceback
-import tempfile
-
 import shutil
 import socket
 import sys
+import tempfile
 import time
+import traceback
+from parser.APIWriter import APIWriter
+from parser.DatabaseWriter import DatabaseWriter
+from parser.MzIdParser import MzIdParser, SqliteMzIdParser
+from parser.schema_validate import schema_validate
 from urllib.parse import urlparse
 
 import orjson
@@ -19,14 +25,6 @@ from sqlalchemy import create_engine, text
 
 # Import custom modules
 from config.config_parser import get_conn_str
-from parser.APIWriter import APIWriter
-from parser.DatabaseWriter import DatabaseWriter
-from parser.MzIdParser import MzIdParser, SqliteMzIdParser
-from parser.schema_validate import schema_validate
-
-# Configure logging
-import logging.config
-import importlib.resources
 
 try:
     # Access `logging.ini` as a resource inside the package

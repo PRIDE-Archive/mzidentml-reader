@@ -1,8 +1,8 @@
-from .AbstractCsvParser import AbstractCsvParser
-from .AbstractCsvParser import CsvParseException
-from time import time
-import re
 import json
+import re
+from time import time
+
+from .AbstractCsvParser import AbstractCsvParser, CsvParseException
 
 
 class LinksOnlyCsvParser(AbstractCsvParser):

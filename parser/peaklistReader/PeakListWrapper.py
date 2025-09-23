@@ -1,16 +1,18 @@
 """
 PeakListWrapper.py
 """
-import ntpath
-import zipfile
-import re
 import gzip
-import os
-from pyteomics import mgf, mzml, ms2
-from abc import ABC, abstractmethod
-import numpy as np
 import io
+import ntpath
+import os
+import re
 import tarfile
+import zipfile
+from abc import ABC, abstractmethod
+
+import numpy as np
+from pyteomics import mgf, ms2, mzml
+
 
 #todo -check error handling
 class PeakListParseError(Exception):

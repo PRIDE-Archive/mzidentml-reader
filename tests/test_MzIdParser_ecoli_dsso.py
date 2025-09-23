@@ -2,16 +2,17 @@
 ToDo: add test that writes multiple mzids into the db and check that results are written in
     properly.
 """
+import logging
+import os
+import struct
+
 import numpy as np
 from numpy.testing import assert_array_equal
-from sqlalchemy import Table
-import os
-import logging
-from sqlalchemy import text
 from pyteomics import mgf
+from sqlalchemy import Table, text
+
 from .db_pytest_fixtures import *
 from .parse_mzid import parse_mzid_into_postgresql, parse_mzid_into_sqlite_xispec
-import struct
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(name)s %(message)s')

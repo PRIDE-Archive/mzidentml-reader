@@ -2,10 +2,12 @@
 This file contains the ModifiedPeptide class,
 which is a SQLAlchemy model for the modifiedpeptide table in the database.
 """
+from typing import Any, Optional
+
+from sqlalchemy import FLOAT, JSON, ForeignKey, Index, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import ForeignKey, Text, Integer, JSON, FLOAT, Index
+
 from models.base import Base
-from typing import Optional, Any
 
 
 class ModifiedPeptide(Base):

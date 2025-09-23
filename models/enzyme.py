@@ -1,6 +1,7 @@
 """This file contains the Enzyme class, which is a SQLAlchemy model for the enzyme table in the database."""
+from sqlalchemy import BOOLEAN, ForeignKey, ForeignKeyConstraint, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import ForeignKey, Text, BOOLEAN, ForeignKeyConstraint, Integer
+
 from models.base import Base
 
 

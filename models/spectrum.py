@@ -1,5 +1,14 @@
+from sqlalchemy import (
+    FLOAT,
+    SMALLINT,
+    ForeignKey,
+    ForeignKeyConstraint,
+    Integer,
+    LargeBinary,
+    Text,
+)
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import ForeignKey, Text, LargeBinary, SMALLINT, FLOAT, Integer, ForeignKeyConstraint
+
 from models.base import Base
 
 

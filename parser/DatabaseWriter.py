@@ -1,9 +1,8 @@
 """DatabaseWriter class for writing results to a postgresql relational database."""
-from sqlalchemy import create_engine, MetaData
-from sqlalchemy import Table
-
-from parser.Writer import Writer
 from parser.database.create_db_schema import create_schema
+from parser.Writer import Writer
+
+from sqlalchemy import MetaData, Table, create_engine
 from sqlalchemy_utils import database_exists
 
 

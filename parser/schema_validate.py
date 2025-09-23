@@ -3,6 +3,7 @@ import importlib
 
 from lxml import etree
 
+
 def schema_validate(xml_file):
     """
     Validate an mzIdentML file against 1.2.0 or 1.3.0 schema.

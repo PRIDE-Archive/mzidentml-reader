@@ -1,6 +1,8 @@
-from sqlalchemy import Table
-import os
 import logging
+import os
+
+from sqlalchemy import Table
+
 from .db_pytest_fixtures import *
 from .parse_mzid import parse_mzid_into_postgresql
 

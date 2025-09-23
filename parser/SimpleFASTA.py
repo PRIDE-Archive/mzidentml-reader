@@ -1,7 +1,6 @@
 """SimpleFASTA.py - Parse a FASTA file and return a dictionary of the sequences."""
 import re
 
-
 #  why aren't we using pyteomics? todo? probably we haven't look at yet coz its only used by cvs parsers not mzid
 
 # noinspection PyUnusedLocal

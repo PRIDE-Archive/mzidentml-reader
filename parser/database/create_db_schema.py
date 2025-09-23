@@ -3,11 +3,11 @@ create_db_schema.py
 This script creates a database and schema for the application.
 """
 from sqlalchemy import create_engine
-from sqlalchemy_utils import database_exists, drop_database, create_database
+from sqlalchemy_utils import create_database, database_exists, drop_database
 
-from models.base import Base
 # noinspection PyUnresolvedReferences
 from models import *
+from models.base import Base
 
 
 def create_db(connection_str):

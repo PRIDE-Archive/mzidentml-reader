@@ -1,6 +1,7 @@
 """This file contains the DBSequence class, which is a SQLAlchemy model for the dbsequence table in the database."""
+from sqlalchemy import ForeignKey, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import ForeignKey, Text, Integer
+
 from models.base import Base
 
 

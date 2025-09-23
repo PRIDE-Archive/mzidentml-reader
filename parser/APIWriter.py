@@ -1,10 +1,11 @@
 """APIWriter.py - Class for writing results via an API."""
-import traceback
-import requests
 import json
+import traceback
+from parser.Writer import Writer
+
+import requests
 
 from config.config_parser import get_api_configs
-from parser.Writer import Writer
 
 
 # noinspection PyPep8Naming

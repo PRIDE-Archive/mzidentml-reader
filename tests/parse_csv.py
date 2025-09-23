@@ -1,4 +1,4 @@
-from parser import FullCsvParser, NoPeakListsCsvParser, LinksOnlyCsvParser
+from parser import FullCsvParser, LinksOnlyCsvParser, NoPeakListsCsvParser
 from parser.DatabaseWriter import DatabaseWriter
 
 

@@ -1,14 +1,13 @@
 """Abstract class for csv parsers."""
 import abc
 import os
+from parser import SimpleFASTA
+from parser.peaklistReader.PeakListWrapper import PeakListWrapper
 from time import time
 
 import numpy as np
 import pandas as pd
 from sqlalchemy import Table
-
-from parser import SimpleFASTA
-from parser.peaklistReader.PeakListWrapper import PeakListWrapper
 
 
 class CsvParseException(Exception):

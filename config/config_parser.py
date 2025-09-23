@@ -1,8 +1,8 @@
 """
 config_parser.py
 """
-from configparser import ConfigParser
 import os
+from configparser import ConfigParser
 
 
 def parse_config(filename, section='postgresql'):

@@ -1,8 +1,10 @@
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Text, JSON, BOOLEAN, TIMESTAMP, func, Integer
-from models.base import Base
-from typing import Optional, Any
 import datetime
+from typing import Any, Optional
+
+from sqlalchemy import BOOLEAN, JSON, TIMESTAMP, Integer, Text, func
+from sqlalchemy.orm import Mapped, mapped_column
+
+from models.base import Base
 
 
 class Upload(Base):
