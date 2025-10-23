@@ -1,5 +1,4 @@
 # mzidentml-reader
-![python-app](https://github.com/Rappsilber-Laboratory/mzidentml-reader/actions/workflows/python-app.yml/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 mzidentml-reader processes mzIdentML 1.2.0 and 1.3.0 files with the primary aim of extracting crosslink information. 
