@@ -39,15 +39,20 @@ class MzIdParseException(Exception):
 class MzIdParser:
     """Class for parsing identification data from mzIdentML."""
 
-    def __init__(self, mzid_path, temp_dir, peak_list_dir, writer, logger):
-        """
-        Initialise the Parser.
+    def __init__(
+        self,
+        mzid_path: str,
+        peak_list_dir: str | None,
+        writer: Any,
+        logger: logging.Logger,
+    ) -> None:
+        """Initialise the Parser.
 
-        :param mzid_path: path to mzidentML file
-        :param temp_dir: absolute path to temp dir for unzipping/storing files
-        :param peak_list_dir: path to the directory containing the peak list file(s)
-        :param writer: result writer
-        :param logger: logger
+        Args:
+            mzid_path: Path to mzidentML file
+            peak_list_dir: Path to the directory containing the peak list file(s)
+            writer: Result writer
+            logger: Logger
         """
         self.search_modifications = None
         self.mzid_path = mzid_path
@@ -63,9 +68,6 @@ class MzIdParser:
         self.pep_ref_to_pep_id_lookup = {}  # peptide_ref to peptide_id lookup
         self.dbseqs = {}
 
-        self.temp_dir = temp_dir
-        if not self.temp_dir.endswith("/"):
-            self.temp_dir += "/"
         self.peak_list_dir = peak_list_dir
         if peak_list_dir and not peak_list_dir.endswith("/"):
             self.peak_list_dir += "/"
@@ -1202,10 +1204,10 @@ class SqliteMzIdParser(MzIdParser):
 
     def write_new_upload(self):
         """Overrides base class function - not needed for xiSPEC."""
-        self.writer.upload_id = 1
         try:
             filename = os.path.basename(self.mzid_path)
             upload_data = {
+                "id": self.writer.upload_id,
                 "identification_file_name": filename,
                 "project_id": self.writer.pxid,
                 "identification_file_name_clean": re.sub(
