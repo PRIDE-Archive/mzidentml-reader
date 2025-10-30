@@ -211,7 +211,7 @@ def test_psql_matrixscience_mzid_parser(use_database, engine):
         stmt = Table(
             "match",
             id_parser.writer.meta,
-            autoload_with=id_parser.writer.engine,
+            autoload_with=engine,
             quote=False,
         ).select()
         rs = conn.execute(stmt)
@@ -221,7 +221,7 @@ def test_psql_matrixscience_mzid_parser(use_database, engine):
         stmt = Table(
             "dbsequence",
             id_parser.writer.meta,
-            autoload_with=id_parser.writer.engine,
+            autoload_with=engine,
             quote=False,
         ).select()
         rs = conn.execute(stmt)
@@ -231,7 +231,7 @@ def test_psql_matrixscience_mzid_parser(use_database, engine):
         stmt = Table(
             "searchmodification",
             id_parser.writer.meta,
-            autoload_with=id_parser.writer.engine,
+            autoload_with=engine,
             quote=False,
         ).select()
         rs = conn.execute(stmt)
@@ -241,7 +241,7 @@ def test_psql_matrixscience_mzid_parser(use_database, engine):
         stmt = Table(
             "enzyme",
             id_parser.writer.meta,
-            autoload_with=id_parser.writer.engine,
+            autoload_with=engine,
             quote=False,
         ).select()
         rs = conn.execute(stmt)
@@ -251,7 +251,7 @@ def test_psql_matrixscience_mzid_parser(use_database, engine):
         stmt = Table(
             "peptideevidence",
             id_parser.writer.meta,
-            autoload_with=id_parser.writer.engine,
+            autoload_with=engine,
             quote=False,
         ).select()
         rs = conn.execute(stmt)
@@ -261,7 +261,7 @@ def test_psql_matrixscience_mzid_parser(use_database, engine):
         stmt = Table(
             "modifiedpeptide",
             id_parser.writer.meta,
-            autoload_with=id_parser.writer.engine,
+            autoload_with=engine,
             quote=False,
         ).select()
         rs = conn.execute(stmt)
@@ -271,7 +271,7 @@ def test_psql_matrixscience_mzid_parser(use_database, engine):
         stmt = Table(
             "spectrum",
             id_parser.writer.meta,
-            autoload_with=id_parser.writer.engine,
+            autoload_with=engine,
             quote=False,
         ).select()
         rs = conn.execute(stmt)
