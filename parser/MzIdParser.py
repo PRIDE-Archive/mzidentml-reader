@@ -218,7 +218,16 @@ class MzIdParser:
                                     with zipfile.ZipFile(
                                         zip_file, "r"
                                     ) as zip_ref:
-                                        zip_ref.extractall(self.peak_list_dir)
+                                        base = os.path.abspath(self.peak_list_dir) + os.sep
+                                        for member in zip_ref.infolist():
+                                            dest = os.path.abspath(
+                                                os.path.join(self.peak_list_dir, member.filename)
+                                            )
+                                            if not dest.startswith(base):
+                                                raise MzIdParseException(
+                                                    f"Illegal path in zip: {member.filename}"
+                                                )
+                                            zip_ref.extract(member, self.peak_list_dir)
                                 except IOError:
                                     raise IOError()
                         try:
@@ -509,6 +518,7 @@ class MzIdParser:
         start_time = time()
 
         db_sequences = []
+        db_seq_index = 0
         for db_id in self.mzid_reader._offset_index["DBSequence"].keys():
             db_sequence = self.mzid_reader.get_by_id(
                 db_id, tag_id="DBSequence"
@@ -543,7 +553,16 @@ class MzIdParser:
             db_sequences.append(db_sequence_data)
             self.dbseqs[db_id] = db_sequence_data
 
-        self.writer.write_data("dbsequence", db_sequences)
+            # Batch write 500 db sequences
+            db_seq_index += 1
+            if db_seq_index % 500 == 0:
+                self.logger.debug("writing 500 db sequences to DB")
+                self.writer.write_data("dbsequence", db_sequences)
+                db_sequences = []
+
+        # write the remaining db sequences
+        if db_sequences:
+            self.writer.write_data("dbsequence", db_sequences)
 
         self.logger.info(
             "parse db sequences - done. Time: {} sec".format(
@@ -1016,26 +1035,33 @@ class MzIdParser:
 
     def write_new_upload(self):
         """Write new upload."""
-        try:
-            filename = os.path.basename(self.mzid_path)
-            upload_data = {
-                "identification_file_name": filename,
-                "project_id": self.writer.pxid,
-                "identification_file_name_clean": re.sub(
-                    r"[^0-9a-zA-Z-]+", "-", filename
-                ),
-            }
-            table = "upload"
+        filename = os.path.basename(self.mzid_path)
+        upload_data = {
+            "identification_file_name": filename,
+            "project_id": self.writer.pxid,
+            "identification_file_name_clean": re.sub(
+                r"[^0-9a-zA-Z-]+", "-", filename
+            ),
+        }
+        table = "upload"
 
-            response = self.writer.write_new_upload(table, upload_data)
-            if response:
-                self.writer.upload_id = int(response)
+        response = self.writer.write_new_upload(table, upload_data)
+        if response is not None:
+            # APIWriter returns response.json() which may be a dict (e.g. {"id": 5})
+            # DatabaseWriter returns a raw int from RETURNING clause
+            if isinstance(response, dict):
+                upload_id = response.get("id") or response.get("upload_id")
+                if upload_id is None:
+                    raise Exception(
+                        f"API response dict does not contain 'id' or 'upload_id': {response}"
+                    )
+                self.writer.upload_id = int(upload_id)
             else:
-                raise Exception(
-                    "Response is not available to create a upload ID"
-                )
-        except SQLAlchemyError as e:
-            print(f"Error during database insert: {e}")
+                self.writer.upload_id = int(response)
+        else:
+            raise Exception(
+                "Response is not available to create a upload ID"
+            )
 
     def write_other_info(self):
         """Write remaining information into Upload table."""
@@ -1116,10 +1142,18 @@ class MzIdParser:
             Path to extracted mzid file
         """
         if archive.endswith("zip"):
-            zip_ref = zipfile.ZipFile(archive, "r")
             unzip_path = archive + "_unzip/"
-            zip_ref.extractall(unzip_path)
-            zip_ref.close()
+            with zipfile.ZipFile(archive, "r") as zip_ref:
+                base = os.path.abspath(unzip_path) + os.sep
+                for member in zip_ref.infolist():
+                    dest = os.path.abspath(
+                        os.path.join(unzip_path, member.filename)
+                    )
+                    if not dest.startswith(base):
+                        raise MzIdParseException(
+                            f"Illegal path in zip: {member.filename}"
+                        )
+                    zip_ref.extract(member, unzip_path)
 
             return_file_list = []
 
