@@ -1,4 +1,4 @@
-ProjectAccession,FIle, InclusionReason
+ProjectAccession,FIle, ExclusionReason
 PXD064792, *, XML syntax errors in all mzIdentML files.
 PXD006079, *, XML syntax errors in all mzIdentML files.
 PXD005786, *, XML syntax errors in all mzIdentML files.
