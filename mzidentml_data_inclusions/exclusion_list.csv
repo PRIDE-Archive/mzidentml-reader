@@ -4,4 +4,66 @@ PXD006079, *, XML syntax errors in all mzIdentML files.
 PXD005786, *, XML syntax errors in all mzIdentML files.
 PXD041334, *, XML syntax errors in all mzIdentML files.
 PXD033615, *, XML syntax errors in all mzIdentML files.
-PXD019771, 200115_A4.mzid, XML syntax error in 200115_A4.mzid
+PXD019771, 200115_A4.mzid, XML syntax error in 200115_A4.mzidPXD001593,75CWS_1apr10undigestedF059901.mzid.gz,No MS:1002511 CV param found
+PXD001677,result_DynamicDBReduction_Plus_Report_Ions.mzid.gz,"Validating file result_DynamicDBReduction_Plus_Report_Ions.mzid. | Sorry, we're only supporting 1.2.0 and 1.3.0 (the ones that contain crosslinks). Rejected schema file: mzIdentML1.1.0.xsd | File result_DynamicDBReduction_Plus_Report_Ions.mzid is schema invalid."
+PXD003718,Bait_ORF102108andwildtype_scaffold_mascot_giardia.mzid.gz,No MS:1002511 CV param found
+PXD004473,CW2177_mzIdentML.mzid,No MS:1002511 CV param found
+PXD004583,20131128sr_5556_wt_rev_01F191420.mzid.gz,No MS:1002511 CV param found
+PXD004722,p4.mzid,No MS:1002511 CV param found
+PXD005461,OBJ7470_F058521.mzid.gz,No MS:1002511 CV param found
+PXD006574,monomerResults.mzid.gz,"Validating file monomerResults.mzid. | Sorry, we're only supporting 1.2.0 and 1.3.0 (the ones that contain crosslinks). Rejected schema file: mzIdentML1.1.0.xsd | File monomerResults.mzid is schema invalid."
+PXD013896,20170823lc_9968_17195_7F255991.mzid.gz,No MS:1002511 CV param found
+PXD013899,20160108lc_8081_16595_1F229960.mzid.gz,No MS:1002511 CV param found
+PXD014359,C_Lee_141014_CRM_dialysis_NCE20_1.mzid,Incorrect Spectra data reference C_Lee_141014_CRM_dialysis_NCE20_1.raw
+PXD015981,H_FFPE_6B.mzid.gz,No MS:1002511 CV param found
+PXD022279,2020-02-11-yj-backus-jcII15-2.mzid.gz,No MS:1002511 CV param found
+PXD022440,IP_15min_Plk1F064863.mzid.gz,No MS:1002511 CV param found
+PXD023525,E1oE2oDSBU.mzid.gz,No MS:1002511 CV param found
+PXD024065,S282Bpa_Trp-AspN_Xlink1__F002059_.mzid.gz,No MS:1002511 CV param found
+PXD024253,117-pDSBE-BSA2.mzid.gz,No MS:1002511 CV param found
+PXD024373,2018_4_31_11_AM_File_Size__707099933__Byte___F022341_.mzid.gz,No MS:1002511 CV param found
+PXD026101,22RV1_mTOR_Torin1_Rep1.mzid.gz,No MS:1002511 CV param found
+PXD026622,Anish_iTRAQ_3h_SPSMS3_fraction1_12.mzid.gz,No MS:1002511 CV param found
+PXD026674,2020-05-30-yj-140min-200nl-Yan-Xue-Steve-Jacobsen-2-WT-2-B.mzid.gz,No MS:1002511 CV param found
+PXD026829,BphP_dimer_DSP.mzid.gz,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 15917 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'name' is required but missing., Line: 15917 | File BphP_dimer_DSP.mzid is schema inva..."
+PXD027149,02_V1.mzid.gz,No MS:1002511 CV param found
+PXD027655,F271205.mzid,No MS:1002511 CV param found
+PXD028685,Belogurov_012_20210327_ZR_ES-2.mzid.gz,No MS:1002511 CV param found
+PXD029749,211021L-BY116_518_CF-trypsin_13-iso-2OH.mzid.gz,No MS:1002511 CV param found
+PXD029833,export_Mzidentml_F141159.mzid.gz,No MS:1002511 CV param found
+PXD030048,export_Mzidentml_F142787.mzid.gz,No MS:1002511 CV param found
+PXD031166,014_EL-X-007_F20__F066046_.mzid.gz,No MS:1002511 CV param found
+PXD031261,Mudpit_4_1__4_1.mzid.gz,No MS:1002511 CV param found
+PXD031385,MSB51075A__F172201_.mzid.gz,No MS:1002511 CV param found
+PXD033004,Closed-search-Amanda_DTB-PT_50ug.mzid,No MS:1002511 CV param found
+PXD033175,04122018_Gavis_YP_285_egfp_glo_Xlink.mzid.gz,No MS:1002511 CV param found
+PXD035201,20210625_Rix_Yi_Exclusion_FBDD_106_2.raw__F002673_.mzid.gz,No MS:1002511 CV param found
+PXD035655,peptides_1_1_0.mzid.gz,No MS:1002511 CV param found
+PXD037894,PD1278_SuTex_FBDD_NT_bio1_run1.raw__F003492_.mzid.gz,No MS:1002511 CV param found
+PXD037983,Ctrl_peptides_1_1_0.mzid.gz,No MS:1002511 CV param found
+PXD038128,190627_VLopez_Khavari_9923_PR1_VLP_Glc_m3.raw_20190702_Byonic.mzid.gz,No MS:1002511 CV param found
+PXD039612,All_Rat-rewiewed.mzid.gz,No MS:1002511 CV param found
+PXD043595,MPA_HA_HX_peptides_1_1_0.mzid,No MS:1002511 CV param found
+PXD044574,GPM22200017993.mzid.gz,No MS:1002511 CV param found
+PXD044625,20200910_AH_LQE_DM93SolSILAC_Pu1Pu1_TC20200902_AMC4_11.raw_20200911_Byonic_C.mzid.gz,No MS:1002511 CV param found
+PXD052832,Mito_merged_norm.mzid.gz,Validation timed out
+PXD055169,OrbitrapLUMOS_20230311_06_ITMSms3cid.mzid,No MS:1002511 CV param found
+PXD055603,mascot_daemon_merge__20161201_HM_2DE_RESISTANCE_T_N2_.mzid.gz,No MS:1002511 CV param found
+PXD056510,E240411_AMC_Mart_LDLandLDLR_SulfoSDA_007and013Ratios_AllData_Xi1.8_filtered_searches_4CCFrags_5TotFrags.mzid.gz,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 10152 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 10152 | File E240411_AMC_Mart_LDLandLDLR_Sulfo..."
+PXD059096,Cas9_DSSO_amountOpti_FAIMS_allreps.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}PeptideEvidence': Duplicate key-sequence ['PE_3581_XL_-354_3581_243_251_-4188399694065697939'] in unique identity-constraint '{http://psidev.info/psi/pi/mzIdentML/1.2}PK_SCPEPEVLIPEPEV'., Line: 1010462 | Error: Element '{http://psidev.info/psi..."
+PXD059974,WT_DHSO_NoBME_DDA.mzid.gz,No MS:1002511 CV param found
+PXD060469,4A_DHSO_Con_Mono_XL_3.mzid,No MS:1002511 CV param found
+PXD061667,Separase-Scc1_Fusion_Cohesin_SulfoSDA_inVitroXL_pepSEC_SelectedDiaz_KYST_3mc_Ccm-SDA_3mods_250127_FDR_1-5_Boost_ResiduePairs_between_100contaminants.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 7503 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 7503 | File Separase-Scc1_Fusion_Cohesin_SulfoS..."
+PXD062002,5mM_DSG.mzid,No MS:1002511 CV param found
+PXD063329,peptides_1_1_3.mzid,No MS:1002511 CV param found
+PXD065365,peptides_1_1_0.mzid,No MS:1002511 CV param found
+PXD065516,T8_15_combined.mzid,File T8_15_combined.mzid is schema valid. | Error parsing T8_15_combined.mzid | Link site for peptide 405_MSbs3_amiSbs3_amiAR_15_LNKLCcmAERK_-1_-1_NonCovalent_p1 is negative
+PXD065858,E250217_AMC_rpn1_IP_C1_IV_Dose_pepSEC_A3to6_ManFilt_3CC_5Tot_FixedFasta_BTWNs.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 903 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 903 | File E250217_AMC_rpn1_IP_C1_IV_Dose_pepSEC..."
+PXD065859,E250317_AMC_HSA_C1_IV_Enriched_Uncleaved_pepSEC_A4toB6_ReSearchedWithPeaks_Xi1.8_NoPreFilter.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 312 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 312 | File E250317_AMC_HSA_C1_IV_Enriched_Unclea..."
+PXD065869,20250422_HSA_C1_HCD_Dose_BothBioReps_ReSearch_Xi1.8_PSU_OR_3SU.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 1349 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 1349 | File 20250422_HSA_C1_HCD_Dose_BothBioRep..."
+PXD065870,E240906_AMC_HSA_VSD_IV_pepSEC_A5toB6_Xi1.8_ManFilt_3CC_5Tot.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 315 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 315 | File E240906_AMC_HSA_VSD_IV_pepSEC_A5toB6_..."
+PXD065871,E250328_AMC_rpn1_IP_VDB_IV_Dose_pepSEC_A3toB6_Filt_3CC_5Tot.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 2214 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 2214 | File E250328_AMC_rpn1_IP_VDB_IV_Dose_pep..."
+PXD065946,E250225_AMC_rpn1_IP_SDA_IV_Dose_pepSEC_A3toB6_TwoInj_filt_FixedFasta_3CC_5Tot.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 4240 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 4240 | File E250225_AMC_rpn1_IP_SDA_IV_Dose_pep..."
+PXD065956,E241202_AMC_HeLa_C1_IS_Sol_Enriched_pepSEC_Uncleaved_A3toB6_Xi1.8_comb_filt_1CC_3Tot.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 13818 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 13818 | File E241202_AMC_HeLa_C1_IS_Sol_Enrich..."
+PXD065958,E240905_AMC_Ecoli_C1_InSitu_Enriched_pepSEC_A5toB6_Xi1.8_3CCFrags.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 344 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 344 | File E240905_AMC_Ecoli_C1_InSitu_Enriched_..."
+PXD065961,E250501_AMC_HSA_Only_C1_IV_Enriched_pepSEC_A3toB6_PeaksAnnotated_Xi1.8_filt_PSU_OR_5SU.mzid,Validation timed out
