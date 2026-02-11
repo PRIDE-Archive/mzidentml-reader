@@ -4,4 +4,48 @@ PXD006079, *, XML syntax errors in all mzIdentML files.
 PXD005786, *, XML syntax errors in all mzIdentML files.
 PXD041334, *, XML syntax errors in all mzIdentML files.
 PXD033615, *, XML syntax errors in all mzIdentML files.
-PXD019771, 200115_A4.mzid, XML syntax error in 200115_A4.mzid
+PXD019771, 200115_A4.mzid, XML syntax error in 200115_A4.mzidPXD001593,83NWI-US_1apr2010undigestedF059907.mzid.gz,No MS:1002511 CV param found
+PXD001677,result_NormalMode.mzid.gz,"Validating file result_NormalMode.mzid. | Sorry, we're only supporting 1.2.0 and 1.3.0 (the ones that contain crosslinks). Rejected schema file: mzIdentML1.1.0.xsd | File result_NormalMode.mzid is schema invalid."
+PXD003532,Experimentmaxquantresults_20_3K4fromQEPlus2_12172015_20_3K4.mzid.gz,No MS:1002511 CV param found
+PXD003718,Baits_ORF4259Nter_ORF4259Cterandwildtype_scaffold_mascot_giardia.mzid.gz,No MS:1002511 CV param found
+PXD004473,CW2176_mzIdentML.mzid,No MS:1002511 CV param found
+PXD004583,20140718_sr_6335_5785_3F204047.mzid.gz,No MS:1002511 CV param found
+PXD004722,srpensrpen_F029370_kontrola.mzid,No MS:1002511 CV param found
+PXD005461,OBJ7325_F057990.mzid.gz,No MS:1002511 CV param found
+PXD006574,dimerResultsToPRIDE.mzid.gz,"Validating file dimerResultsToPRIDE.mzid. | Sorry, we're only supporting 1.2.0 and 1.3.0 (the ones that contain crosslinks). Rejected schema file: mzIdentML1.1.0.xsd | File dimerResultsToPRIDE.mzid is schema invalid."
+PXD006938,2_NFS1-Fxn-IscU_MarkleyF016506.mzid.gz,No MS:1002511 CV param found
+PXD007716,F074077.mzid.gz,No MS:1002511 CV param found
+PXD007836,peptides_1_1_0.mzid.gz,No MS:1002511 CV param found
+PXD009641,ID16364_01_E749_3008_030315F056134.mzid.gz,No MS:1002511 CV param found
+PXD012466,mapeixiang-NSSO-3.mzid.gz,No MS:1002511 CV param found
+PXD014523,xQuest_BSA_DSS_CID.mzid,"XML is invalid. First 20 errors: | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': No match found for key-sequence ['MS'] of keyref '{http://psidev.info/psi/pi/mzIdentML/1.2}FK_CVlist5'., Line: 11710 | File xQuest_BSA_DSS_CID.mzid is schema invalid."
+PXD017290,Mudpit_MassSpectrumF001689.mzid.gz,No MS:1002511 CV param found
+PXD017792,XLG729RE1aE2o.mzid.gz,No MS:1002511 CV param found
+PXD017873,20200302_072815_PBS_X02_02.raw.mzid.gz,No MS:1002511 CV param found
+PXD018600,CSL9686A14RW2_E2_105_peptides_1_1_0.mzid.gz,No MS:1002511 CV param found
+PXD018687,SHR72_4_DC18.mzid.gz,No MS:1002511 CV param found
+PXD018935,Ribosome_3A.mzid,No MS:1002511 CV param found
+PXD019017,TRY_AMPK_DSSO_XL-MS.mzid,No MS:1002511 CV param found
+PXD019713,mapx_Xlink_17-SIM.mzid.gz,No MS:1002511 CV param found
+PXD019944,mapx_xlink_13-4.mzid.gz,No MS:1002511 CV param found
+PXD023525,E1oE2oCDI.mzid.gz,No MS:1002511 CV param found
+PXD026622,Anish_iTRAQ_3h_SPSMS3_fraction1_12.mzid.gz,No MS:1002511 CV param found
+PXD027655,F271205.mzid,No MS:1002511 CV param found
+PXD028685,20201231_006_ZR_Smirnova_M7.mzid.gz,No MS:1002511 CV param found
+PXD028919,20191007_nst9054_20-1917_Troyanovsky_01__F025136_.mzid.gz,No MS:1002511 CV param found
+PXD030048,export_Mzidentml_F004245.mzid.gz,No MS:1002511 CV param found
+PXD031159,20210923_SUMO2_49TAG_INCUBATE_CELL_LYSATE_TWICEHISIP_TRYPSIN_REP1.mzid.gz,No MS:1002511 CV param found
+PXD031385,MSB51072A__F172198_.mzid.gz,No MS:1002511 CV param found
+PXD033004,Closed-search-Amanda_DTB-PT_500ug.mzid,No MS:1002511 CV param found
+PXD037894,PD1280_SuTex_FBDD_Soto_bio1_run2.raw__F003497_.mzid.gz,No MS:1002511 CV param found
+PXD038128,190627_VLopez_Khavari_9923_PR1_VLP_Glc_m3.raw_20190702_Byonic.mzid.gz,No MS:1002511 CV param found
+PXD048297,peptides_1_1_0.mzid.gz,No MS:1002511 CV param found
+PXD051688,2023-1215_Ecoli-TMT18plex-TotalPeptideAmount.mzid.gz,No MS:1002511 CV param found
+PXD053415,Experiment_RA912_8MAM_from_RA912_68MAM.mzid.gz,No MS:1002511 CV param found
+PXD055077,SUMOylation_PhoX_TBDSPP_FAIMS_140823.mzid.gz,File SUMOylation_PhoX_TBDSPP_FAIMS_140823.mzid is schema valid. | Error parsing SUMOylation_PhoX_TBDSPP_FAIMS_140823.mzid | list index out of range
+PXD056510,E240411_AMC_Mart_LDLandLDLR_SulfoSDA_007and013Ratios_AllData_Xi1.8_filtered_searches_4CCFrags_5TotFrags.mzid.gz,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 10152 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 10152 | File E240411_AMC_Mart_LDLandLDLR_Sulfo..."
+PXD065365,peptides_1_1_0.mzid,No MS:1002511 CV param found
+PXD065858,E250221_AMC_rpn1_IP_C1_IV_Dose_pepSEC_A3toB6_ReSearchWithPeaks_Xi1.8_filt_PSU_OR_5SU_BTWNS.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 1523 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 1523 | File E250221_AMC_rpn1_IP_C1_IV_Dose_pepS..."
+PXD065869,20250422_HSA_C1_HCD_Dose_BothBioReps_ReSearch_Xi1.8_PSU_ONLY.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 1857 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 1857 | File 20250422_HSA_C1_HCD_Dose_BothBioRep..."
+PXD065956,E241202_AMC_HeLa_C1_IS_Sol_Enriched_pepSEC_Uncleaved_A3toB6_Xi1.8_comb_filt_1CC_3Tot.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 13818 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 13818 | File E241202_AMC_HeLa_C1_IS_Sol_Enrich..."
+PXD065958,E240905_AMC_Ecoli_C1_InSitu_Enriched_pepSEC_A5toB6_Xi1.8_3CCFrags.mzid,"Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'cvRef' is required but missing., Line: 344 | Error: Element '{http://psidev.info/psi/pi/mzIdentML/1.2}cvParam': The attribute 'accession' is required but missing., Line: 344 | File E240905_AMC_Ecoli_C1_InSitu_Enriched_..."
