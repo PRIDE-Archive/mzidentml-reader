@@ -231,7 +231,7 @@ class MzIdParser:
                             )
                         except Exception:
                             raise MzIdParseException(
-                                "Missing peak list file: %s"
+                                "Missing peak list file or peak list parse failure: %s"
                                 % peak_list_file_path
                             )
 
