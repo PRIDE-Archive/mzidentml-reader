@@ -10,6 +10,7 @@ import os
 import re
 import struct
 import traceback
+from urllib.parse import unquote
 from parser.APIWriter import APIWriter
 from parser.compression import extract_gz, extract_zip_safe
 from parser.peaklistReader.PeakListWrapper import PeakListWrapper
@@ -260,7 +261,13 @@ class MzIdParser:
 
             self.check_spectra_data_validity(sp_datum)
 
-            peak_list_file_name = ntpath.basename(sp_datum["location"])
+            # SpectraData/@location is typed xsd:anyURI, so percent-decode
+            # before extracting the basename. ntpath handles both forward
+            # and backslash separators so we still strip the directory off
+            # of producer-emitted Windows paths.
+            raw_location = sp_datum["location"]
+            decoded_location = unquote(raw_location)
+            peak_list_file_name = ntpath.basename(decoded_location)
             file_format = _cvparam_accession(
                 sp_datum["FileFormat"],
                 context=f"SpectraData[id={spectra_data_id}].FileFormat",
@@ -307,8 +314,17 @@ class MzIdParser:
                             )
                         except Exception:
                             raise MzIdParseException(
-                                "Missing peak list file or peak list parse failure: %s"
-                                % peak_list_file_path
+                                f"Could not load peak list "
+                                f"'{peak_list_file_name}' for "
+                                f"SpectraData[id={spectra_data_id}]. "
+                                f"Looked in {self.peak_list_dir} (also "
+                                f"tried .gz and any .zip archives there). "
+                                f"The mzid declares location="
+                                f"{raw_location!r}; we use the basename "
+                                f"{peak_list_file_name!r} (after URI "
+                                f"percent-decoding) and expect the peak "
+                                f"list file to be present alongside the "
+                                f"mzid."
                             )
 
                 peak_list_readers[spectra_data_id] = peak_list_reader
