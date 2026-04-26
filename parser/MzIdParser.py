@@ -330,10 +330,16 @@ class MzIdParser:
                 frag_tol_plus = frag_tol["search tolerance plus value"]
                 frag_tol_value = re.sub("[^0-9,.]", "", str(frag_tol_plus))
                 if not frag_tol_value:
-                    # cvParam is present but has no value= attribute, so
-                    # there's no numeric tolerance to record. Fall through
-                    # to the default-10-ppm fallback below.
-                    raise KeyError("FragmentTolerance has no numeric value")
+                    # FragmentTolerance is present but its cvParam has no
+                    # value= attribute. The producer asserted a tolerance
+                    # without supplying a number; that's malformed input,
+                    # not a missing-tolerance case, so fail loudly rather
+                    # than silently substituting a default.
+                    raise MzIdParseException(
+                        "FragmentTolerance cvParam 'search tolerance plus "
+                        "value' (MS:1001412) has no value attribute. "
+                        "Include a numeric value."
+                    )
                 if frag_tol_plus.unit_info.lower() == "parts per million":
                     frag_tol_unit = "ppm"
                 elif frag_tol_plus.unit_info.lower() == "dalton":
