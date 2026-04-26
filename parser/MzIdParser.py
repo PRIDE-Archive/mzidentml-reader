@@ -41,6 +41,33 @@ _ROOT_PREFIX_RE = re.compile(
 )
 
 
+def _cvparam_accession(obj: Any, *, context: str) -> str:
+    """Extract the cvParam accession from a pyteomics-parsed wrapper element.
+
+    pyteomics represents a cvParam with no value= attribute as a cvstr
+    carrying .accession, but a cvParam with a value= attribute as a
+    {cvstr: unitstr} one-element dict where the key carries .accession.
+    Both forms appear in real-world mzIdentML; this helper accepts either.
+
+    Args:
+        obj: The element pyteomics returned (e.g. sp_datum["FileFormat"]).
+        context: Human-readable description of where this is being read,
+            used in the error message so users can locate the offending
+            element in their file.
+    """
+    if hasattr(obj, "accession"):
+        return obj.accession
+    if isinstance(obj, dict) and len(obj) == 1:
+        key = next(iter(obj.keys()))
+        if hasattr(key, "accession"):
+            return key.accession
+    raise MzIdParseException(
+        f"Could not read cvParam accession for {context}. "
+        f"Expected a single cvParam with an 'accession' attribute; got "
+        f"{type(obj).__name__}: {obj!r}."
+    )
+
+
 def _root_namespace_prefix(mzid_path: str) -> str | None:
     """Return the XML namespace prefix on the root MzIdentML element, or None.
 
@@ -234,8 +261,16 @@ class MzIdParser:
             self.check_spectra_data_validity(sp_datum)
 
             peak_list_file_name = ntpath.basename(sp_datum["location"])
-            file_format = sp_datum["FileFormat"].accession
-            spectrum_id_format = sp_datum["SpectrumIDFormat"].accession
+            file_format = _cvparam_accession(
+                sp_datum["FileFormat"],
+                context=f"SpectraData[id={spectra_data_id}].FileFormat",
+            )
+            spectrum_id_format = _cvparam_accession(
+                sp_datum["SpectrumIDFormat"],
+                context=(
+                    f"SpectraData[id={spectra_data_id}].SpectrumIDFormat"
+                ),
+            )
 
             if self.peak_list_dir:
                 peak_list_file_path = os.path.join(self.peak_list_dir, peak_list_file_name)
