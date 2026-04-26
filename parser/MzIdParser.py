@@ -34,6 +34,30 @@ class MzIdParseException(Exception):
     pass
 
 
+_ROOT_PREFIX_RE = re.compile(
+    rb"<\s*(?P<prefix>[A-Za-z_][\w.-]*):MzIdentML\b[^>]*"
+    rb"\bxmlns:(?P=prefix)\s*=",
+    re.DOTALL,
+)
+
+
+def _root_namespace_prefix(mzid_path: str) -> str | None:
+    """Return the XML namespace prefix on the root MzIdentML element, or None.
+
+    pyteomics' offset index does not handle non-default namespace prefixes
+    on element tags (e.g. <ns0:MzIdentML xmlns:ns0="...">) and silently
+    indexes zero elements for such files. Detecting this lets us raise a
+    clear error rather than crashing later in DB writes.
+    """
+    try:
+        with open(mzid_path, "rb") as fh:
+            head = fh.read(4096)
+    except OSError:
+        return None
+    m = _ROOT_PREFIX_RE.search(head)
+    return m.group("prefix").decode() if m else None
+
+
 # noinspection PyProtectedMember
 class MzIdParser:
     """Class for parsing identification data from mzIdentML."""
@@ -100,6 +124,23 @@ class MzIdParser:
             )
         except Exception as e:
             raise MzIdParseException(type(e).__name__, e.args)
+
+        if not list(self.mzid_reader._offset_index.keys()):
+            ns_prefix = _root_namespace_prefix(self.mzid_path)
+            if ns_prefix:
+                raise MzIdParseException(
+                    f"pyteomics indexed no elements in {self.mzid_path}. "
+                    f"The root element uses a non-default XML namespace "
+                    f"prefix ('{ns_prefix}:'), which pyteomics' offset "
+                    f"index does not handle. Re-export the file declaring "
+                    f"the mzIdentML namespace as the default (xmlns=\"...\" "
+                    f"on the root, no prefix on element tags)."
+                )
+            raise MzIdParseException(
+                f"pyteomics indexed no elements in {self.mzid_path}. "
+                f"The file may be empty, malformed, or use an unsupported "
+                f"mzIdentML namespace."
+            )
 
         self.logger.info(
             "reading mzid - done. Time: {} sec".format(
