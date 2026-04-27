@@ -23,7 +23,7 @@ from urllib.parse import urlparse
 
 import orjson
 import requests
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, event, text
 
 # Import custom modules
 from config.config_parser import get_conn_str
@@ -361,9 +361,15 @@ def sequences_and_residue_pairs(filepath: str, temp_dir: str) -> dict:
         logging.info(f"residue pair SQL execution time: {elapsed_time}")
         rp_rows = rs.mappings().all()
         rp_rows = [dict(row) for row in rp_rows]
-    # Extract database path from connection string and remove it
+    # Extract database path from connection string and remove it.
+    # Dispose the engine first so no pooled connections are still open —
+    # on Windows that would block os.remove (WinError 32).
     temp_database = conn_str.replace("sqlite:///", "")
-    os.remove(temp_database)
+    engine.dispose()
+    try:
+        os.remove(temp_database)
+    except OSError as e:
+        logger.warning(f"Could not remove temp DB {temp_database}: {e}")
     return {"sequences": seq_rows, "residue_pairs": rp_rows}
 
 
@@ -661,14 +667,18 @@ def validate_file(
         print(f"File {filepath} is schema valid.")
 
         conn_str = _create_temp_database(temp_dir, file)
-        engine = create_engine(conn_str)
         test_database = conn_str.replace("sqlite:///", "")
 
-        # switch on Foreign Key Enforcement
-        with engine.connect() as conn:
-            conn.execute(text("PRAGMA foreign_keys = ON;"))
-
         writer = DatabaseWriter(conn_str, upload_id=1, pxid="Validation")
+
+        # SQLite FK enforcement is per-connection: register a pool listener
+        # so every connection the parser checks out has the pragma set.
+        @event.listens_for(writer.engine, "connect")
+        def _enable_sqlite_fk(dbapi_conn, _record):
+            cursor = dbapi_conn.cursor()
+            cursor.execute("PRAGMA foreign_keys = ON")
+            cursor.close()
+
         id_parser = SqliteMzIdParser(
             os.path.join(local_dir, file),
             peaklist_dir,
@@ -677,13 +687,20 @@ def validate_file(
         )
         try:
             id_parser.parse()
-            os.remove(test_database)
         except Exception as e:
             print(f"Error parsing {filepath}")
             print(e)
             return False
         finally:
+            # Dispose the engine before deleting the file — on Windows
+            # an open pooled connection blocks os.remove (WinError 32).
             _dispose_writer_engine(writer)
+            try:
+                os.remove(test_database)
+            except OSError as e:
+                logger.warning(
+                    f"Could not remove temp DB {test_database}: {e}"
+                )
 
     else:
         print(f"File {filepath} is schema invalid.")
