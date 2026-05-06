@@ -107,6 +107,7 @@ class MzIdParser:
         )
 
         self.contains_crosslinks = False
+        self.is_de_novo = False
 
         self.warnings = set()
 
@@ -391,11 +392,14 @@ class MzIdParser:
             add_sp = sid_protocol.get("AdditionalSearchParams", {})
             # Threshold
             threshold = sid_protocol.get("Threshold", {})
+            search_type = sid_protocol["SearchType"]
+            if cvquery(search_type, "MS:1001010") is not None:
+                self.is_de_novo = True
             data = {
                 "id": sip_int_id,
                 "upload_id": self.writer.upload_id,
                 "sip_ref": sid_protocol["id"],
-                "search_type": sid_protocol["SearchType"],
+                "search_type": search_type,
                 "frag_tol": frag_tol_value,
                 "frag_tol_unit": frag_tol_unit,
                 "additional_search_params": cvquery(add_sp),
@@ -634,8 +638,14 @@ class MzIdParser:
                 self.writer.write_data("dbsequence", db_sequences)
                 db_sequences = []
 
-        # write the remaining db sequences
-        if db_sequences:
+        if not self.dbseqs:
+            if not self.is_de_novo:
+                raise MzIdParseException(
+                    "No DBSequence elements found. A non-de-novo search must reference a protein "
+                    "database. If this is a de novo search, add the cvParam MS:1001010 "
+                    "('de novo search') to the SearchType in your SpectrumIdentificationProtocol."
+                )
+        elif db_sequences:
             self.writer.write_data("dbsequence", db_sequences)
 
         self.logger.info(
@@ -823,10 +833,19 @@ class MzIdParser:
                     raise e
 
         # write the remaining data
-        try:
-            self.writer.write_data("peptideevidence", pep_evidences)
-        except Exception as e:
-            raise e
+        if not self.mzid_reader._offset_index["PeptideEvidence"]:
+            if not self.is_de_novo:
+                raise MzIdParseException(
+                    "No PeptideEvidence elements found. A non-de-novo search must link peptides "
+                    "to proteins via PeptideEvidence. If this is a de novo search, add the cvParam "
+                    "MS:1001010 ('de novo search') to the SearchType in your "
+                    "SpectrumIdentificationProtocol."
+                )
+        elif pep_evidences:
+            try:
+                self.writer.write_data("peptideevidence", pep_evidences)
+            except Exception as e:
+                raise e
 
         self.mzid_reader.reset()
 
