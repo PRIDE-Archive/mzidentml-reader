@@ -207,8 +207,14 @@ class MGFReader(SpectraReader):
                     spec_id = int(spec_id)
                 except ValueError:
                     raise PeakListParseError("invalid spectrum ID format!")
-            # noinspection PyUnresolvedReferences
-            spec = self._reader[spec_id]
+            try:
+                # noinspection PyUnresolvedReferences
+                spec = self._reader[spec_id]
+            except IndexError:
+                raise PeakListParseError(
+                    f"index={spec_id} not found in {self.file_name} "
+                    f"({len(self._reader)} spectra) - file may be truncated"
+                )
 
         # MS:1000775 single peak list nativeID format
         # The nativeID must be the same as the source file ID.

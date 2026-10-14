@@ -531,8 +531,12 @@ def convert_from_ftp(
                 ftp = get_ftp_login(ftp_ip)
                 try:
                     ftp.cwd(urlparse(ftp_url).path)
-                    with open(os.path.join(str(path), f), "wb") as file:
+                    # download to .part and rename on completion so an interrupted
+                    # download is never mistaken for a complete file on the next run
+                    part_path = os.path.join(str(path), f + ".part")
+                    with open(part_path, "wb") as file:
                         ftp.retrbinary(f"RETR {f}", file.write)
+                    os.rename(part_path, os.path.join(str(path), f))
                     ftp.quit()
                     break  # Success, exit retry loop
                 except ftplib.error_perm as e:
