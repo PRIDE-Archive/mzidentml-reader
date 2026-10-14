@@ -50,10 +50,8 @@ class DatabaseWriter(Writer):
             data = [data]
 
         keys = list(set([k for r in data for k in r.keys()]))
-        for r in data:
-            for k in keys:
-                if k not in r:
-                    r[k] = None
+        # pad copies rather than mutating the caller's dicts
+        data = [{**dict.fromkeys(keys), **r} for r in data]
         table = Table(table, self.meta, autoload_with=self.engine)
         with self.engine.connect() as conn:
             page_size = max(1, 32766 // len(keys))

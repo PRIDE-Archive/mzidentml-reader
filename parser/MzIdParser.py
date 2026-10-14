@@ -815,7 +815,7 @@ class MzIdParser:
                 is_decoy = peptide_evidence["isDecoy"]  # isDecoy att, optional
                 if is_decoy:
                     self.dbseqs[peptide_evidence["dBSequence_ref"]][
-                        is_decoy
+                        "is_decoy"
                     ] = True
 
             pep_ev_data = {
@@ -985,7 +985,7 @@ class MzIdParser:
         """Check that all target proteins have a sequence."""
 
         for db_seq in self.dbseqs.values():
-            if "sequence" not in db_seq and not db_seq["is_decoy"]:
+            if not db_seq.get("sequence") and not db_seq["is_decoy"]:
                 raise MzIdParseException(
                     f"DBSequence {db_seq['accession']} has no sequence."
                 )
