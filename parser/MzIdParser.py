@@ -632,7 +632,9 @@ class MzIdParser:
 
             # Seq is optional child elem of DBSequence
             if "Seq" in db_sequence and isinstance(db_sequence["Seq"], str):
-                db_sequence_data["sequence"] = db_sequence["Seq"]
+                # the schema forbids whitespace in Seq, but strip any that slipped in
+                # (e.g. pretty-printed files) so it doesn't end up in the sequence
+                db_sequence_data["sequence"] = "".join(db_sequence["Seq"].split())
             elif "length" in db_sequence:
                 db_sequence_data["sequence"] = "X" * db_sequence["length"]
 
@@ -1021,15 +1023,19 @@ class MzIdParser:
 
                     spectrum = peak_list_reader[sid_result["spectrumID"]]
 
-                    # convert mz and intensity numpy arrays into tightly packed binary objects
-                    mz_blob = spectrum.mz_values.tolist()
-                    mz_blob = struct.pack(f"{len(mz_blob)}d", *mz_blob)
-                    intensity_blob = spectrum.int_values.tolist()
-                    intensity_blob = struct.pack(
-                        f"{len(intensity_blob)}d", *intensity_blob
-                    )
-                    # Encode binary data using base64 to enable transmitting in API call and then decode in API
+                    # DatabaseWriter stores the numpy arrays as whatever the spectrum
+                    # columns are (float8[]/real[] in PostgreSQL, packed float64 blobs in
+                    # SQLite or older bytea schemas).
+                    mz_blob = spectrum.mz_values
+                    intensity_blob = spectrum.int_values
+                    # The API takes tightly packed float64 binary, base64 encoded
                     if isinstance(self.writer, APIWriter):
+                        mz_blob = mz_blob.tolist()
+                        mz_blob = struct.pack(f"{len(mz_blob)}d", *mz_blob)
+                        intensity_blob = intensity_blob.tolist()
+                        intensity_blob = struct.pack(
+                            f"{len(intensity_blob)}d", *intensity_blob
+                        )
                         mz_blob = base64.b64encode(mz_blob).decode("utf-8")
                         intensity_blob = base64.b64encode(
                             intensity_blob
